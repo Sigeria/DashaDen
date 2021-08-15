@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Birthday Card</title>
+  <!-- <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'> 
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>  -->
+  <link rel="stylesheet" href="./src/dist/style.css">
+</head>
+<body class="container">
+<noscript>Javascript включи блет</noscript>
+
+<div class="hint" id="hint">
+  <p id="head" unselectable="on" class="unselectable">Дать пять</p>
+  <div id="curvearrow"></div>
+</div>
+
+
+<div class="card" id="card">
+  <div class="back">
+    <div class="image-container" unselectable="on"><img src="./images/v2.png" alt="картинка"  width="270"/>
+    </div>
+    <audio controls src="./music/Rivellon.mp3" preload="none" type="audio/mpeg" loop=true></audio>
+  </div>
+
+  <div class="front" id="card-front">
+    <div class="cover-shape">
+        <div class="cake">
+          <button class="palm">
+            <div class="finger"></div>
+            <div class="finger2"></div>
+            <div class="finger3"></div>
+            <div class="finger4"></div>
+            <div class="finger5"></div>
+          </button>
+        </div>
+    </div>
+  </div>  
+  <div class="text-container">
+    <p id="head" unselectable="on" class="unselectable">С днем рождения, Даша!</p>
+    <p unselectable="on" class="unselectable">
+      <span>Ты самый лучший ДМ, который у меня был</span>
+      <span>
+        Ты солнышко (｡◕‿◕｡)
+      </span>
+      <span>
+        Твоим котам повезло с тобой (ᵔᴥᵔ)
+      </span>
+      <span>
+        Оставайся такой же пуськой &lt;3
+      </span>
+      </p>
+  </div>
+</div>
+<script>
+  window.addEventListener("load", Loaded);
+
+  function Loaded(){
+    console.log("load");
+    const button = document.getElementById("card-front"); 
+    const container = document.querySelector('.container');
+    container.classList.add('container--visible');
+
+    button.addEventListener("click", clickStart)
+  }
+  
+function clickStart(){
+  console.log("clicked");
+  const hint = document.getElementById("hint");
+  hint.classList.add('hint--hidden')
+  const card = document.getElementById("card");
+  card.style.pointerEvents = "auto";
+  card.classList.add('card--open')
+  document.getElementById("card-front").style.pointerEvents = "none";
+
+  const front = card.querySelector(".front");
+  front.classList.toggle("front-2");
+
+  const back = card.querySelector(".back");
+  back.classList.toggle("back-2");
+
+  PlayMusic();
+
+
+      }
+
+      function PlayMusic(event){
+        const audio = document.querySelector("audio");
+        audio.play();
+        audio.muted = false;
+        audio.volume = 0.2;
+        audio.hidden = true;
+        }
+</script>
+
+<!-- partial -->
+  
+</body>
+</html>

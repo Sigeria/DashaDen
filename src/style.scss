@@ -1,0 +1,441 @@
+@import url(https://fonts.googleapis.com/css?family=Nobile:400italic,700italic);
+
+@font-face {
+  font-family: 'AmaticSC';
+  src: url('../../fonts/AmaticSC-Regular.ttf') format('truetype')
+}
+
+@font-face {
+  font-family: 'AmaticSC';
+  src: url('../../fonts/AmaticSC-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
+
+$size: 1.0;
+$arrow-size: 2.0;
+
+$background-color: #AEE6E6;
+
+$card-cover-color: #FFDA77;
+$card-cover-border-color: #FBF6F0;
+$hand-color: #FFA45B;
+
+$hint-text-color: #FBF6F0;
+$arrow-color: #FBF6F0;
+
+$card-background-color: #FBF6F0;
+$card-text-color: #331717;
+
+$hint-font: 'AmaticSC';
+$card-font: 'Caveat';
+
+
+
+
+html, body {
+  overflow: hidden;
+  background-color: $background-color;
+  height: 100vh;
+}
+
+*.unselectable {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  opacity: 0;
+  will-change: opacity;
+}
+
+.container--visible {
+  transition: opacity 0.8s ease-in-out;
+  opacity: 1;
+}
+
+
+/*#region Card*/
+.card {
+  position: relative;
+  width: 300px;
+  height: 425px;
+  border: 10px solid $card-cover-border-color;
+  
+  box-shadow: inset 10px 0px 15px 0px rgba(0,0,0,0.1);
+  background-color: $card-background-color;
+  z-index: 50;
+  will-change: transform;
+}
+
+.card--open {
+  transition: transform 0.8s ease-in-out;
+  transform: translateX(40%);
+
+}
+
+.cover-shape {
+  position: absolute;
+  width: 50%;
+  height: 36%;
+  top: 30%;
+  left: 25%;
+}
+
+.cake {
+    position: absolute;
+    width: 100px*$size;
+    height: 100px*$size;
+    top: 55%;
+    left: -45%;
+    margin-top: -70px*$size;
+}
+
+.card .back .image-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 15px;
+  top: 22px;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/*#region CardPages*/
+
+.card .front { 
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: -10px 0px 0px -10px;
+  border: 10px solid $card-cover-border-color;
+  backface-visibility: hidden;
+  background-color: $card-cover-color;
+  /* background-image: url($cover-image); */
+  background-size: contain;
+  transform-style: preserve-3d;
+  transform-origin: 0% 50%;
+  transform: perspective(800px) rotateY(0deg);
+  transition: transform 0.8s ease-in-out;
+  z-index: 1;
+}
+
+.card .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 10px solid $card-cover-border-color;
+  margin: -10px 0px 0px -10px;
+  backface-visibility: visible;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,.5));
+  transform-style: preserve-3d;
+  transform-origin: 0% 50%;
+  transform: perspective(800px) rotateY(0deg);
+  transition: transform 0.8s ease-in-out;
+  background-color: $card-background-color;
+  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+
+.card .front-2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: -10px 0px 0px -10px;
+  border: 10px solid $card-cover-border-color;
+  backface-visibility: hidden;
+  background-color: $card-cover-color;
+  /* background-image: url($cover-image); */
+  background-size: contain;
+  transform-style: preserve-3d;
+  transform-origin: 0% 50%;
+  transition: transform 0.8s ease-in-out;
+  z-index: 1;
+  
+  transform: perspective(800px) rotateY(-170deg);
+  // background-color: rgb(115-50, 163-50, 191-50);
+}
+
+.card .back-2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 10px solid $card-cover-border-color;
+  margin: -10px 0px 0px -10px;
+  backface-visibility: visible;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,.5));
+  transform-style: preserve-3d;
+  transform-origin: 0% 50%;
+  transition: transform 0.8s ease-in-out;
+  z-index: 1;
+
+  transform: perspective(800px) rotateY(-170deg);
+  box-shadow: 7px 0px 5px 0px rgba(0,0,0,0.3), inset 2px 0px 15px 0px rgba(0,0,0,0.1);
+  background-color: $card-background-color;
+}
+
+/*#endregion CardPages*/
+
+/*#region CardText*/
+
+.card .text-container {
+  padding: 0.8rem;
+  margin: auto;
+  z-index: inherit;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.card .text-container #head {
+  font-size: 2rem;
+  margin: 20px auto 30px auto;
+  z-index: inherit;
+}
+
+.card p {
+  font-size: 1.8rem;
+  line-height: 1.1;
+  font-family: $card-font;
+  color: $card-text-color;
+
+  font-style: italic;
+  text-align: center;
+  margin: 0;
+}
+
+.card span {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/*#endregion CardText*/
+
+/*#region Hand*/
+
+.card .palm {
+  border: none;
+  position: absolute;
+  background-color: $hand-color;
+  width: 170px*$size;
+  height: 160px*$size;
+  border-radius: 50%;
+  left: 50%;
+  top: 40%;
+  /* z-index: 10; */
+  box-shadow:
+      0 0 10px rgba($hand-color, 0.5),
+      0 0 20px rgba($hand-color, 0.5),
+      0 0 60px rgba($hand-color, 0.5),
+      0 0 80px rgba($hand-color, 0.5);
+  transform-origin: 50% 90%;
+  animation: flicker 1s ease-in-out infinite;
+}
+.card:active .palm{
+  transform: scale(0.9);
+}
+
+.finger {
+  position: absolute;
+  background-color: $hand-color;
+  width: 25px*$size;
+  height: 115px*$size;
+  border-radius: 50%;
+  top: -24px*$size;
+  left: 5%;
+  margin-left: -7.5px*$size;
+  /* z-index: 10; */
+  box-shadow:
+      0 0 10px rgba($hand-color, 0.5),
+      0 0 20px rgba($hand-color, 0.5),
+      0 0 60px rgba($hand-color, 0.5),
+      0 0 80px rgba($hand-color, 0.5);
+  transform-origin: 50% 90%;
+  animation: flicker 1s ease-in-out infinite;
+}
+
+.finger2 {
+  position: absolute;
+  background-color: $hand-color;
+  width: 45px*$size;
+  height: 225px*$size;
+  border-radius: 50%;
+  top: -75px*$size;
+  left: 20%;
+  margin-left: -7.5px*$size;
+  /* z-index: 10; */
+  box-shadow:
+      0 0 10px rgba($hand-color, 0.5),
+      0 0 20px rgba($hand-color, 0.5),
+      0 0 60px rgba($hand-color, 0.5),
+      0 0 80px rgba($hand-color, 0.5);
+  transform-origin: 50% 90%;
+  animation: flicker 1s ease-in-out infinite;
+}
+
+.finger3 {
+  position: absolute;
+  background-color: $hand-color;
+  width: 41px*$size;
+  height: 225px*$size;
+  border-radius: 50%;
+  top: -85px*$size;
+  left: 43%;
+  margin-left: -7.5px*$size;
+  /* z-index: 10; */
+  box-shadow:
+      0 0 10px rgba($hand-color, 0.5),
+      0 0 20px rgba($hand-color, 0.5),
+      0 0 60px rgba($hand-color, 0.5),
+      0 0 80px rgba($hand-color, 0.5);
+  transform-origin: 50% 90%;
+  animation: flicker 1s ease-in-out infinite;
+}
+
+.finger4 {
+  position: absolute;
+  background-color: $hand-color;
+  width: 45px*$size;
+  height: 225px*$size;
+  border-radius: 50%;
+  top: -75px*$size;
+  left: 65%;
+  margin-left: -7.5px*$size;
+  /* z-index: 10; */
+  box-shadow:
+      0 0 10px rgba($hand-color, 0.5),
+      0 0 20px rgba($hand-color, 0.5),
+      0 0 60px rgba($hand-color, 0.5),
+      0 0 80px rgba($hand-color, 0.5);
+  transform-origin: 50% 90%;
+  animation: flicker 1s ease-in-out infinite;
+}
+
+.finger5 {
+  position: absolute;
+  background-color: $hand-color;
+  width: 45px*$size;
+  height: 145px*$size;
+  border-radius: 50%;
+  top: -5px*$size;
+  left: 60%;
+  margin-left: -7.5px*$size;
+  /* z-index: 10; */
+  box-shadow:
+      0 0 10px rgba($hand-color, 0.5),
+      0 0 20px rgba($hand-color, 0.5),
+      0 0 60px rgba($hand-color, 0.5),
+      0 0 80px rgba($hand-color, 0.5);
+  transform-origin: 50% 90%;
+  transform: perspective(800px) rotateZ(35deg);
+  animation: flicker 1s ease-in-out infinite;
+}
+
+/*#endregion Hand*/
+
+@keyframes flicker {
+    0% {
+        /* transform: rotateZ(5deg); */
+        box-shadow: 
+            0 0 10px rgba($hand-color, 0.2),
+            0 0 20px rgba($hand-color, 0.2),
+            0 0 60px rgba($hand-color, 0.2),
+            0 0 80px rgba($hand-color, 0.2) }
+    25% {
+        /* transform: rotateZ(-5deg); */
+        box-shadow:
+            0 0 10px rgba($hand-color, 0.5),
+            0 0 20px rgba($hand-color, 0.5),
+            0 0 60px rgba($hand-color, 0.5),
+            0 0 80px rgba($hand-color, 0.5) }
+    50% {
+        /* transform: rotateZ(10deg); */
+        box-shadow:
+            0 0 10px rgba($hand-color, 0.3),
+            0 0 20px rgba($hand-color, 0.3),
+            0 0 60px rgba($hand-color, 0.3),
+            0 0 80px rgba($hand-color, 0.3) }
+    75% {
+        /* transform: rotateZ(-10deg); */
+        box-shadow:
+            0 0 10px rgba($hand-color, 0.4),
+            0 0 20px rgba($hand-color, 0.4),
+            0 0 60px rgba($hand-color, 0.4),
+            0 0 80px rgba($hand-color, 0.4) }
+    100% {
+        /* transform: rotateZ(5deg); */
+        box-shadow:
+            0 0 10px rgba($hand-color, 0.5),
+            0 0 20px rgba($hand-color, 0.5),
+            0 0 60px rgba($hand-color, 0.5),
+            0 0 80px rgba($hand-color, 0.5) }
+}
+
+/*#endregion Card*/
+
+/*#region Hint*/
+
+.hint {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  height: 230px;
+  width: 100%;
+  z-index: 10;
+  opacity: 1;
+}
+
+
+.hint--hidden {
+  transition: opacity 0.8s ease-in-out;
+  opacity: 0;
+}
+
+
+.hint p {
+  margin-bottom: 40px;
+  font-family: $hint-font, sans-serif;
+  font-size: 3rem;
+  line-height: 1.5;
+  color: $hint-text-color;
+  text-align: center;
+  z-index: inherit;  
+} 
+
+.hint #curvearrow {
+  margin-left: 50px;
+  position: relative;
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-right: 9px solid $arrow-color;
+  transform: rotate(10deg) scale(5.0);
+}
+.hint #curvearrow:after {
+  content: "";
+  position: absolute;
+  border: 0 solid transparent;
+  border-top: 3px solid $arrow-color;
+  border-radius: 20px 0 0 0;
+  top: -12px;
+  left: -9px;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg) scaleX(1.5);
+}
+/*#endregion Hint*/
+
+
